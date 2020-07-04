@@ -2,6 +2,7 @@ import React, { useEffect, useState, FormEvent } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import io from "socket.io-client";
 import axios from "axios";
+import Loadingbar from "react-top-loading-bar";
 
 import WriteMessage from "../WriteMessage/WriteMessage";
 import Messages from "../Messages/Messages";
@@ -13,12 +14,14 @@ export default function Chat() {
   const [name, setName] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
+  const [progress, setProgress] = useState(0);
   const ENDPOINT = "https://chatify-server-socket.herokuapp.com";
 
   const { search } = useLocation();
   const history = useHistory();
 
   useEffect(() => {
+    setProgress(50);
     async function connect() {
       const query = new URLSearchParams(search);
       const username = query.get("name");
@@ -33,6 +36,7 @@ export default function Chat() {
 
       const response = await axios.get(`${ENDPOINT}/messages`);
       setMessages(response.data);
+      setProgress(100);
 
       socket.emit("join", { name: username }, () => {});
     }
@@ -54,14 +58,17 @@ export default function Chat() {
   }
 
   return (
-    <div>
-      <h3 className="m-2 text-2xl">General</h3>
-      <Messages messages={messages} user={name} />
-      <WriteMessage
-        message={message}
-        sendMessage={sendMessage}
-        setMessage={setMessage}
-      />
-    </div>
+    <>
+      <Loadingbar progress={progress} height={3} color="#276749" />
+      <div>
+        <h3 className="m-2 text-2xl">General</h3>
+        <Messages messages={messages} user={name} />
+        <WriteMessage
+          message={message}
+          sendMessage={sendMessage}
+          setMessage={setMessage}
+        />
+      </div>
+    </>
   );
 }
