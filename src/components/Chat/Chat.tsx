@@ -1,10 +1,11 @@
 import React, { useEffect, useState, FormEvent } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import io from "socket.io-client";
+import axios from "axios";
+
 import WriteMessage from "../WriteMessage/WriteMessage";
 import Messages from "../Messages/Messages";
 import { IMessage } from "../Message/Message";
-import axios from "axios";
 
 let socket: SocketIOClient.Socket;
 
@@ -12,7 +13,7 @@ export default function Chat() {
   const [name, setName] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
-  const ENDPOINT = "http://localhost:5000";
+  const ENDPOINT = "https://chatify-server-socket.herokuapp.com";
 
   const { search } = useLocation();
   const history = useHistory();
@@ -30,7 +31,7 @@ export default function Chat() {
         history.replace("/");
       }
 
-      const response = await axios.get("http://localhost:5000/messages");
+      const response = await axios.get(`${ENDPOINT}/messages`);
       setMessages(response.data);
 
       socket.emit("join", { name: username }, () => {});

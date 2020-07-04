@@ -23,7 +23,7 @@ export default function Messages({ messages, user }: MessagesProps) {
   };
 
   return (
-    <div className="messages overflow-auto pb-4">
+    <div className="messages overflow-auto pb-8">
       {messages.map((message, i) => (
         <div key={i}>
           <Message message={message} name={user} />

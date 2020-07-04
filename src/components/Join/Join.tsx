@@ -14,7 +14,7 @@ export default function Join() {
     }
   };
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-3xl mx-auto">
       <h2 className="text-4xl text-green-800">Welcome to Chatify</h2>
       <h3 className="mt-3 text-lg">
         To start chatting you have to select a name
@@ -43,7 +43,7 @@ export default function Join() {
           <span className="p-1 text-sm bg-red-600 text-red-100">{error}</span>
         )}
         <Link
-          className="py-4 mt-4 bg-green-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-blue-500 active:bg-blue-700 active:shadow-none"
+          className="py-4 mt-4 bg-green-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-green-500 active:bg-green-700 active:shadow-none"
           onClick={validate}
           to={`/general?name=${name}`}
         >

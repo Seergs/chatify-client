@@ -610,6 +610,10 @@ video {
   height: calc(100vh - 5.25rem);
 }
 
+.messages-full {
+  height: calc(100vh - 10rem);
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

@@ -6,4 +6,8 @@
   height: calc(100vh - 5.25rem);
 }
 
+.messages-full {
+  height: calc(100vh - 10rem);
+}
+
 @tailwind utilities;
