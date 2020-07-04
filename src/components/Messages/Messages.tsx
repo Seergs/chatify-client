@@ -11,7 +11,6 @@ export default function Messages({ messages, user }: MessagesProps) {
 
   useEffect(() => {
     executeScroll();
-    console.log("Scrolling");
   }, [messages]);
 
   const executeScroll = () => {
