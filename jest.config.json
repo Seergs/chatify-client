@@ -1,5 +1,0 @@
-{
-  "testRegex": "((\\.|/*.)(spec)\\.tsx?$",
-  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"],
-  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
-}

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, FormEvent } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import io from "socket.io-client";
-import WriteMessage from "./WriteMessage/WriteMessage";
-import Messages from "./Messages/Messages";
-import { IMessage } from "./Message/Message";
+import WriteMessage from "../WriteMessage/WriteMessage";
+import Messages from "../Messages/Messages";
+import { IMessage } from "../Message/Message";
+import axios from "axios";
 
 let socket: SocketIOClient.Socket;
 
@@ -17,7 +18,7 @@ export default function Chat() {
   const history = useHistory();
 
   useEffect(() => {
-    function connect() {
+    async function connect() {
       const query = new URLSearchParams(search);
       const username = query.get("name");
 
@@ -28,6 +29,10 @@ export default function Chat() {
       } else {
         history.replace("/");
       }
+
+      const response = await axios.get("http://localhost:5000/messages");
+      setMessages(response.data);
+
       socket.emit("join", { name: username }, () => {});
     }
 
