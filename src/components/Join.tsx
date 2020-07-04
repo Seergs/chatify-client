@@ -37,13 +37,13 @@ export default function Join() {
           onChange={(e) => setName(e.target.value)}
           required
           placeholder="Your username"
-          className="mt-1 px-2 bg-gray-100 h-16 text-lg text-gray-800 border rounded shadow-inner"
+          className="mt-1 px-2 bg-gray-200 h-16 text-lg text-gray-800 border rounded focus:outline-none focus:shadow-outline"
         />
         {error && (
-          <span className="p-2 text-sm bg-red-600 text-red-100">{error}</span>
+          <span className="p-1 text-sm bg-red-600 text-red-100">{error}</span>
         )}
         <Link
-          className="py-4 mt-4 bg-blue-600 rounded text-center text-gray-100 font-semibold shadow-md"
+          className="py-4 mt-4 bg-blue-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-blue-500 active:bg-blue-700 active:shadow-none"
           onClick={validate}
           to={`/general?name=${name}`}
         >

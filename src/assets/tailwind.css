@@ -2,4 +2,8 @@
 
 @tailwind components;
 
+.messages {
+  height: calc(100vh - 5.25rem);
+}
+
 @tailwind utilities;
