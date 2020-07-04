@@ -23,7 +23,7 @@ export default function Join() {
         This is the name that other users will see
       </p>
 
-      <form className="mt-6 flex flex-col">
+      <div className="mt-6 flex flex-col">
         <label
           className="font-medium text-gray-600 tracking-wide"
           htmlFor="name"
@@ -49,7 +49,7 @@ export default function Join() {
         >
           Join
         </Link>
-      </form>
+      </div>
     </div>
   );
 }
