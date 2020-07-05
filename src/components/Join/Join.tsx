@@ -8,34 +8,6 @@ export default function Join() {
 
   const history = useHistory();
 
-  const validateUsername = async (name: string) => {
-    type ReturnData = {
-      error: null | string;
-    };
-
-    let returnData: ReturnData = {
-      error: null,
-    };
-    if (!name || !name.trim().length) {
-      returnData.error = "Please select a username";
-    } else if (name === "Chatify") {
-      returnData.error = "Not a valid username (this is the admin username)";
-    } else if (name.trim().length < 6) {
-      returnData.error = "Username must be 6 characters at least";
-    } else {
-      try {
-        //await axios.post("http://localhost:5000/users", { name });
-        await axios.post("https://chatify-server-socket.herokuapp.com/users", {
-          name,
-        });
-      } catch (e) {
-        returnData.error = e.response.data.message;
-      }
-    }
-
-    return returnData;
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -82,3 +54,31 @@ export default function Join() {
     </div>
   );
 }
+
+export const validateUsername = async (name: string) => {
+  type ReturnData = {
+    error: null | string;
+  };
+
+  let returnData: ReturnData = {
+    error: null,
+  };
+  if (!name || !name.trim().length) {
+    returnData.error = "Please select a username";
+  } else if (name === "Chatify") {
+    returnData.error = "Not a valid username (this is the admin username)";
+  } else if (name.trim().length < 6) {
+    returnData.error = "Username must be 6 characters at least";
+  } else {
+    try {
+      //await axios.post("http://localhost:5000/users", { name });
+      await axios.post("https://chatify-server-socket.herokuapp.com/users", {
+        name,
+      });
+    } catch (e) {
+      returnData.error = e.response.data.message;
+    }
+  }
+
+  return returnData;
+};

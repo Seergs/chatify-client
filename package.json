@@ -19,9 +19,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-scroll-to-bottom": "^3.0.0",
+    "react-spring": "^8.0.27",
     "react-top-loading-bar": "^1.2.0",
     "socket.io-client": "^2.3.0",
     "tailwindcss": "^1.4.6",
+    "toasted-notes": "^3.2.0",
     "typescript": "^3.7.5"
   },
   "scripts": {

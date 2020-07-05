@@ -6,6 +6,9 @@ import Loadingbar from "react-top-loading-bar";
 import { FaUser } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
+import toast from "toasted-notes";
+import "toasted-notes/src/styles.css";
+
 import WriteMessage from "../WriteMessage/WriteMessage";
 import Messages from "../Messages/Messages";
 import { IMessage } from "../Message/Message";
@@ -33,13 +36,14 @@ export default function Chat() {
       const query = new URLSearchParams(search);
       const username = query.get("name");
 
-      socket = io(ENDPOINT);
-
       if (username) {
         setName(username);
       } else {
         history.replace("/");
+        toast.notify("Please select a name", { type: "error" });
       }
+
+      socket = io(ENDPOINT);
 
       const response = await axios.get(`${ENDPOINT}/messages`);
       setMessages(response.data);
