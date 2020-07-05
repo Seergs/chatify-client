@@ -1,16 +1,49 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, FormEvent } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Join() {
   const [name, setName] = useState("");
   const [error, setError] = useState<null | string>(null);
-  const validate = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (!name) {
-      e.preventDefault();
-      setError("Please select a username");
+
+  const history = useHistory();
+
+  const validateUsername = async (name: string) => {
+    type ReturnData = {
+      error: null | string;
+    };
+
+    let returnData: ReturnData = {
+      error: null,
+    };
+    if (!name || !name.trim().length) {
+      returnData.error = "Please select a username";
+    } else if (name === "Chatify") {
+      returnData.error = "Not a valid username (this is the admin username)";
     } else if (name.trim().length < 6) {
-      e.preventDefault();
-      setError("Username must be at least 6 characters long");
+      returnData.error = "Username must be 6 characters at least";
+    } else {
+      try {
+        //await axios.post("http://localhost:5000/users", { name });
+        await axios.post("https://chatify-server-socket.herokuapp.com/users", {
+          name,
+        });
+      } catch (e) {
+        returnData.error = e.response.data.message;
+      }
+    }
+
+    return returnData;
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const { error } = await validateUsername(name);
+    if (error) {
+      setError(error);
+    } else {
+      history.push(`/general?name=${name}`);
     }
   };
   return (
@@ -23,7 +56,7 @@ export default function Join() {
         This is the name that other users will see
       </p>
 
-      <div className="mt-6 flex flex-col">
+      <form className="mt-6 flex flex-col" onSubmit={handleSubmit}>
         <label
           className="font-medium text-gray-600 tracking-wide"
           htmlFor="name"
@@ -42,14 +75,10 @@ export default function Join() {
         {error && (
           <span className="p-1 text-sm bg-red-600 text-red-100">{error}</span>
         )}
-        <Link
-          className="py-4 mt-4 bg-green-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-green-500 active:bg-green-700 active:shadow-none"
-          onClick={validate}
-          to={`/general?name=${name}`}
-        >
+        <button className="py-4 mt-4 bg-green-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-green-500 active:bg-green-700 active:shadow-none">
           Join
-        </Link>
-      </div>
+        </button>
+      </form>
     </div>
   );
 }
