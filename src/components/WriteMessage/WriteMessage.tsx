@@ -14,7 +14,7 @@ export default function WriteMessage({
 }: WriteMessageProps) {
   return (
     <form
-      className="fixed flex w-screen bottom-0 mb-1 pr-4 lg:p-0"
+      className="fixed flex w-screen bottom-0 mb-1 md:pr-4 lg:p-0"
       onSubmit={(e) => sendMessage(e)}
     >
       <input

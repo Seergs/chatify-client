@@ -10,4 +10,13 @@
   height: calc(100vh - 10rem);
 }
 
+.menu-active {
+  transform: translateX(100vw);
+  transition: all 1s linear;
+}
+
+.menu {
+  transform: translateX(0);
+}
+
 @tailwind utilities;

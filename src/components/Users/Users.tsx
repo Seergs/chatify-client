@@ -7,7 +7,7 @@ type UserProps = {
 
 export default function Users({ users }: UserProps) {
   return (
-    <div className="hidden lg:block lg:w-1/5">
+    <div className="hidden lg:block lg:w-1/5 overflow-auto">
       <h5 className="flex items-center justify-center h-8 m-2 font-medium text-gray-700">
         Users in the Chat
       </h5>
