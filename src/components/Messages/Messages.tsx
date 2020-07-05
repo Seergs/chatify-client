@@ -22,7 +22,7 @@ export default function Messages({ messages, user }: MessagesProps) {
   };
 
   return (
-    <div className="messages overflow-auto pb-8">
+    <div className="mb-16 mt-16 overflow-auto">
       {messages.map((message, i) => (
         <div key={i}>
           <Message message={message} name={user} />

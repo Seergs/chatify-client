@@ -14,11 +14,11 @@ export default function WriteMessage({
 }: WriteMessageProps) {
   return (
     <form
-      className="fixed flex w-screen bottom-0 mb-1 md:pr-4 lg:p-0"
+      className="fixed flex w-screen h-16 bottom-0  md:pr-4 lg:p-0 z-20"
       onSubmit={(e) => sendMessage(e)}
     >
       <input
-        className="h-16 bg-gray-100 p-2 w-4/5 md:w-11/12 border focus:outline-none focus:shadow-outline "
+        className="bg-gray-100 px-4 py-2 w-4/5 md:w-11/12 border focus:outline-none focus:shadow-outline "
         type="text"
         placeholder="Type a message..."
         value={message}

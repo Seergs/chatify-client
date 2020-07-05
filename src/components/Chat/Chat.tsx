@@ -80,16 +80,16 @@ export default function Chat() {
   return (
     <>
       <Loadingbar progress={progress} height={3} color="#276749" />
-      <div className="flex">
+      <div className="flex app">
         <div className="w-screen lg:w-4/5">
-          <div className="flex justify-between items-center lg:hidden">
-            <h3 className="m-2 text-2xl">General</h3>
+          <div className="fixed top-0 w-full flex justify-between items-center h-12 bg-white">
+            <h3 className="mx-2 text-2xl">General</h3>
             <FaUser
-              className="mr-3 fill-current text-gray-700 cursor-pointer"
+              className="mr-3 fill-current text-gray-700 cursor-pointer lg:hidden"
               onClick={toggleUserList}
             />
           </div>
-          <h3 className="hidden lg:block m-2 text-2xl">General</h3>
+
           <Messages messages={messages} user={name} />
           <WriteMessage
             message={message}
@@ -120,7 +120,7 @@ export default function Chat() {
                 bounceStiffness: 600,
               },
             }}
-            className="fixed top-0 w-screen h-screen z-10 p-3 bg-gray-200 overflow-auto"
+            className="fixed top-0 w-screen h-screen z-30 p-3 bg-gray-200 overflow-auto"
           >
             <UsersMobile users={users} toggleList={toggleUserList} />
           </motion.div>

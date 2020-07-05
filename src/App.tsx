@@ -6,7 +6,7 @@ import Chat from "./components/Chat/Chat";
 
 function App() {
   return (
-    <div className="App antialiased">
+    <div className="App antialiased h-full">
       <BrowserRouter>
         <Switch>
           <Route path="/general" component={Chat} />

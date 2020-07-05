@@ -2,8 +2,8 @@
 
 @tailwind components;
 
-.messages {
-  height: calc(100vh - 5.25rem);
+.app-height {
+  min-height: -webkit-fill-available;
 }
 
 .messages-full {
