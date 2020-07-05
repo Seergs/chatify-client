@@ -7,6 +7,7 @@ import Loadingbar from "react-top-loading-bar";
 import WriteMessage from "../WriteMessage/WriteMessage";
 import Messages from "../Messages/Messages";
 import { IMessage } from "../Message/Message";
+import Users from "../Users/Users";
 
 let socket: SocketIOClient.Socket;
 
@@ -14,8 +15,10 @@ export default function Chat() {
   const [name, setName] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState("");
+  const [users, setUsers] = useState<string[]>([]);
   const [progress, setProgress] = useState(0);
   const ENDPOINT = "https://chatify-server-socket.herokuapp.com";
+  //const ENDPOINT = "http://localhost:5000";
 
   const { search } = useLocation();
   const history = useHistory();
@@ -38,7 +41,9 @@ export default function Chat() {
       setMessages(response.data);
       setProgress(100);
 
-      socket.emit("join", { name: username }, () => {});
+      socket.emit("join", { name: username }, (usersInChat: string[]) => {
+        setUsers((users) => [...users, ...usersInChat]);
+      });
     }
 
     connect();
@@ -47,6 +52,9 @@ export default function Chat() {
   useEffect(() => {
     socket.on("message", (message: IMessage) => {
       setMessages((messages) => [...messages, message]);
+      if (message.users) {
+        setUsers(message.users);
+      }
     });
   }, []);
 
@@ -60,14 +68,17 @@ export default function Chat() {
   return (
     <>
       <Loadingbar progress={progress} height={3} color="#276749" />
-      <div>
-        <h3 className="m-2 text-2xl">General</h3>
-        <Messages messages={messages} user={name} />
-        <WriteMessage
-          message={message}
-          sendMessage={sendMessage}
-          setMessage={setMessage}
-        />
+      <div className="flex">
+        <div className="w-screen lg:w-4/5">
+          <h3 className="m-2 text-2xl">General</h3>
+          <Messages messages={messages} user={name} />
+          <WriteMessage
+            message={message}
+            sendMessage={sendMessage}
+            setMessage={setMessage}
+          />
+        </div>
+        <Users users={users} />
       </div>
     </>
   );

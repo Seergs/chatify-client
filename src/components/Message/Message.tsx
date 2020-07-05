@@ -5,6 +5,7 @@ import ReactEmoji from "react-emoji";
 export interface IMessage {
   user: string;
   text: string;
+  users?: string[];
 }
 
 type MessageProps = {

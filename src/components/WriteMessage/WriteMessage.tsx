@@ -14,7 +14,7 @@ export default function WriteMessage({
 }: WriteMessageProps) {
   return (
     <form
-      className="fixed flex w-screen bottom-0 mb-1 sm:pr-4"
+      className="fixed flex w-screen bottom-0 mb-1 pr-4 lg:p-0"
       onSubmit={(e) => sendMessage(e)}
     >
       <input
@@ -26,7 +26,7 @@ export default function WriteMessage({
         onKeyPress={(e) => (e.key === "Enter" ? sendMessage(e) : null)}
       />
       <button
-        className="flex items-center justify-center w-1/5 md:w-1/12 bg-green-700 hover:bg-green-600 active:bg-green-800 text-green-100"
+        className="flex items-center justify-center w-1/5 md:w-1/12  bg-green-700 hover:bg-green-600 active:bg-green-800 text-green-100"
         type="submit"
       >
         <FaPaperPlane className="h-5 w-5 fill-current text-green-200" />
