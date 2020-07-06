@@ -5,13 +5,18 @@ import { useHistory } from "react-router-dom";
 export default function Join() {
   const [name, setName] = useState("");
   const [error, setError] = useState<null | string>(null);
+  const [isLoading, setLoading] = useState(false);
 
   const history = useHistory();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    setLoading(true);
     setError(null);
     const { error } = await validateUsername(name);
+
+    setLoading(false);
     if (error) {
       setError(error);
     } else {
@@ -47,8 +52,12 @@ export default function Join() {
         {error && (
           <span className="p-1 text-sm bg-red-600 text-red-100">{error}</span>
         )}
-        <button className="py-4 mt-4 bg-green-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-green-500 active:bg-green-700 active:shadow-none">
-          Join
+        <button
+          className={`py-4 mt-4 bg-green-600 rounded text-center text-gray-100 font-semibold shadow-md uppercase hover:bg-green-500 active:bg-green-700 active:shadow-none focus:outline-none ${
+            isLoading ? "cursor-not-allowed opacity-50" : ""
+          } `}
+        >
+          {isLoading ? "Joining..." : "Join"}
         </button>
       </form>
     </div>

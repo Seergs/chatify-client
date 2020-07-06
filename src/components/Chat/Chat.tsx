@@ -58,6 +58,12 @@ export default function Chat() {
   }, [ENDPOINT, search, history]);
 
   useEffect(() => {
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  useEffect(() => {
     socket.on("message", (message: IMessage) => {
       setMessages((messages) => [...messages, message]);
       if (message.users) {
